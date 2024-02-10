@@ -28,48 +28,48 @@ export const fbController = {
 
   connectFbAccount: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-      try {
-        const user = res.locals.user;
-        const fbAccount = await dbModels.FbAccount.find({
-          client: user.roleData.client._id,
-        });
-        if (fbAccount.length > 0) {
-          fbAccount[0].isConnected = true;
-          fbAccount[0].userAccessToken = req.body.fbAccessToken;
-          fbAccount[0].fbUserId = req.body.fbUserId;
-          fbAccount[0].save();
-          res
-            .status(StatusCodes.SUCCESS)
-            .send({ success: true, message: "All samples" });
-        } else {
-          const pages = await fbService.getPages(
-            req.body.fbUserId,
-            req.body.fbAccessToken
-          );
+      // try {
+      // const user = res.locals.user;
+      // const fbAccount = await dbModels.FbAccount.find({
+      //   client: user.roleData.client._id,
+      // });
+      // if (fbAccount.length > 0) {
+      //   fbAccount[0].isConnected = true;
+      //   fbAccount[0].userAccessToken = req.body.fbAccessToken;
+      //   fbAccount[0].fbUserId = req.body.fbUserId;
+      //   fbAccount[0].save();
+      //   res
+      //     .status(StatusCodes.SUCCESS)
+      //     .send({ success: true, message: "All samples" });
+      // } else {
+      //   const pages = await fbService.getPages(
+      //     req.body.fbUserId,
+      //     req.body.fbAccessToken
+      //   );
 
-          console.log("gsasaasgettpages", pages);
+      //   console.log("gsasaasgettpages", pages);
 
-          const gfa = await fbService.generateFeedAccess(pages);
-          console.log("gggggffaa", gfa);
-          const fba = await dbModels.FbAccount.create({
-            page: pages && pages.length > 0 && pages[0].id,
-            email: user.email,
-            client: user.roleData.client._id,
-            userAccessToken: req.body.fbAccessToken,
-            fbUserId: req.body.fbUserId,
-            isConnected: true,
-            pageId: pages && pages.length > 0 && pages[0].id,
-            pageAccessToken: pages && pages.length > 0 && pages[0].access_token,
-            pageName: pages && pages.length > 0 && pages[0].name,
-          });
-          console.log("sssssfba", fba);
-          res
-            .status(StatusCodes.SUCCESS)
-            .send({ success: true, message: "All samples" });
-        }
-      } catch (err) {
-        console.log(err);
-      }
+      //   const gfa = await fbService.generateFeedAccess(pages);
+      //   console.log("gggggffaa", gfa);
+      //   const fba = await dbModels.FbAccount.create({
+      //     page: pages && pages.length > 0 && pages[0].id,
+      //     email: user.email,
+      //     client: user.roleData.client._id,
+      //     userAccessToken: req.body.fbAccessToken,
+      //     fbUserId: req.body.fbUserId,
+      //     isConnected: true,
+      //     pageId: pages && pages.length > 0 && pages[0].id,
+      //     pageAccessToken: pages && pages.length > 0 && pages[0].access_token,
+      //     pageName: pages && pages.length > 0 && pages[0].name,
+      //   });
+      //   console.log("sssssfba", fba);
+      res
+        .status(StatusCodes.SUCCESS)
+        .send({ success: true, message: "All samples" });
+      //   }
+      // } catch (err) {
+      //   console.log(err);
+      // }
     }
   ),
 
