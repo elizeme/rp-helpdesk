@@ -56,6 +56,7 @@ export const fbController = {
           isConnected: true,
           pageId: pages && pages.length > 0 && pages[0].id,
           pageAccessToken: pages && pages.length > 0 && pages[0].access_token,
+          pageName: pages && pages.length > 0 && pages[0].name,
         });
         res
           .status(StatusCodes.SUCCESS)
@@ -203,19 +204,26 @@ export const fbController = {
       } else if (res.locals.role === "client") {
         id = res.locals.user.roleData.client._id;
       }
-      const fbAccount = await dbModels.FbAccount.find({
+      const fbAccount: any = await dbModels.FbAccount.find({
         client: id,
       });
 
-      const pages = await fbService.getPages(
-        fbAccount[0].fbUserId,
-        fbAccount[0].userAccessToken
-      );
-      if (!pages) {
-        return next(
-          new ErrorResponse(`Pages not found`, StatusCodes.NOT_FOUND)
-        );
-      }
+      const pages: any = [
+        {
+          id: fbAccount.pageId,
+          access_token: fbAccount.pageAccessToken,
+          pageName: fbAccount.pageName,
+        },
+      ];
+      // const pages = await fbService.getPages(
+      //   fbAccount[0].fbUserId,
+      //   fbAccount[0].userAccessToken
+      // );
+      // if (!pages) {
+      //   return next(
+      //     new ErrorResponse(`Pages not found`, StatusCodes.NOT_FOUND)
+      //   );
+      // }
       res.status(StatusCodes.SUCCESS).send({ pages, message: "All samples" });
     }
   ),

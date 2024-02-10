@@ -6,6 +6,9 @@ export interface IFbAccountDocument extends mongoose.Document {
   email: string;
   userAccessToken: string;
   fbUserId: string;
+  pageId: string;
+  pageAccessToken: string;
+  pageName: string;
   isConnected: boolean;
   createdAt: Date;
   updatedAt: Date;

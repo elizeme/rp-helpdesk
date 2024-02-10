@@ -19,6 +19,7 @@ const FbAccountSchema = new mongoose.Schema(
     },
     pageId: { type: String },
     pageAccessToken: { type: String },
+    pageName: { type: String },
     userAccessToken: {
       type: String,
     },
