@@ -30,6 +30,7 @@ async function handleRecievingMessage(message: any) {
   if (conversation.length == 0) {
     const fbAccount = await dbModels.FbAccount.find({ pageId: pageId });
     let customerDetails = { first_name: "", last_name: "", profile_pic: "" };
+    console.log("sender", message.sender.id);
     // try {
     //   customerDetails = await fbService.getCustomer(
     //     customerId,
