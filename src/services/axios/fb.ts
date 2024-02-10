@@ -68,9 +68,9 @@ const fbService = {
     const data = { subscribed_fields: ["feed", "messages", "group_feed"] };
 
     console.log("pages", pages);
-    pages.forEach((page: any) => {
-      console.log("pppppp", pages);
-    });
+    // pages.forEach((page: any) => {
+    //   console.log("pppppp", pages);
+    // });
     //   const response = axios.post(
     //     `${baseUrl}/${userId}/${page.id}/subscribed_apps?access_token=${page.}`
     //   );
