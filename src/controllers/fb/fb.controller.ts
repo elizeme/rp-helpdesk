@@ -142,6 +142,9 @@ export const fbController = {
 
         if (body.entry[0] && body.entry[0].messaging) {
           const message = body.entry[0].messaging[0];
+          console.log("asjsa", body);
+          console.log("mekjasjsa", body.entry);
+          console.log("mnjknanmnadsnmnas", body.entry[0]);
           await handleRecievingMessage(message);
         }
         res.status(StatusCodes.SUCCESS).send({ message: "All samples" });
