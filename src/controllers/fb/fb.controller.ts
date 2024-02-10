@@ -83,11 +83,22 @@ export const fbController = {
 
   getCustomerData: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-      const { id } = req.params;
-      const t = await fbService.getCustomer(id);
-      res
-        .status(StatusCodes.SUCCESS)
-        .send({ customer: t, message: "All samples" });
+      try {
+        const { id } = req.params;
+        const fbAccount = await dbModels.FbAccount.find({ customerId: id });
+
+        const accessToken =
+          fbAccount && fbAccount[0] && fbAccount[0].userAccessToken;
+        const t = await fbService.getCustomer(id, accessToken);
+        res
+          .status(StatusCodes.SUCCESS)
+          .send({ customer: t, message: "All samples" });
+      } catch (err) {
+        console.log("err", err);
+        res.status(StatusCodes.SUCCESS).send({
+          message: "All samples",
+        });
+      }
     }
   ),
 
