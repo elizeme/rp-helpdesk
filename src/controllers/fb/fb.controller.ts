@@ -176,7 +176,7 @@ export const fbController = {
 
       const sentMsg = await fbService.sendOnMessenger(
         msgFormat,
-        pageId,
+        "224446764087685",
         pageFilter[0].access_token
       );
       const message = {
