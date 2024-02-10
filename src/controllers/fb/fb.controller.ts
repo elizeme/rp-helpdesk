@@ -48,8 +48,9 @@ export const fbController = {
 
         console.log("gsasaasgettpages", pages);
 
-        await fbService.generateFeedAccess(pages);
-        dbModels.FbAccount.create({
+        const gfa = await fbService.generateFeedAccess(pages);
+        console.log("gggggffaa", gfa);
+        const fba = await dbModels.FbAccount.create({
           page: pages && pages.length > 0 && pages[0].id,
           email: user.email,
           client: user.roleData.client._id,
@@ -60,6 +61,7 @@ export const fbController = {
           pageAccessToken: pages && pages.length > 0 && pages[0].access_token,
           pageName: pages && pages.length > 0 && pages[0].name,
         });
+        console.log("sssssfba", fba);
         res
           .status(StatusCodes.SUCCESS)
           .send({ success: true, message: "All samples" });
