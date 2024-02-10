@@ -33,9 +33,17 @@ export const fbController = {
         client: user.roleData.client._id,
       });
       if (fbAccount.length > 0) {
+        const pages = await fbService.getPages(
+          req.body.fbUserId,
+          req.body.fbAccessToken
+        );
         fbAccount[0].isConnected = true;
         fbAccount[0].userAccessToken = req.body.fbAccessToken;
         fbAccount[0].fbUserId = req.body.fbUserId;
+        fbAccount[0].pageId = pages && pages.length > 0 && pages[0].id;
+        fbAccount[0].pageAccessToken =
+          pages && pages.length > 0 && pages[0].access_token;
+        fbAccount[0].pageName = pages && pages.length > 0 && pages[0].name;
         fbAccount[0].save();
         return res
           .status(StatusCodes.SUCCESS)
