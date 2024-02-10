@@ -41,7 +41,7 @@ async function handleRecievingMessage(message: any) {
     // }
     console.log("acccccc", fbAccount);
     const newConversation = await dbModels.Conversation.create({
-      client: pageId,
+      client: fbAccount[0].client,
       pageId,
       customerId,
       messages: [recievedMsg],
@@ -51,7 +51,7 @@ async function handleRecievingMessage(message: any) {
       customerProfilePic: `${customerDetails?.profile_pic}`,
     });
     const newMessenger = await dbModels.Messenger.create({
-      client: pageId,
+      client: fbAccount[0].client,
       pageId,
       customerId,
       lastMessage: recievedMsg.messageBody,
