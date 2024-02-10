@@ -27,6 +27,8 @@ async function handleRecievingMessage(message: any) {
     lastMessageTimestamp: { $gt: timeBefore24Hours },
   });
 
+  console.log("convvvvv", conversation);
+
   if (conversation.length == 0) {
     const fbAccount = await dbModels.FbAccount.find({ pageId: pageId });
     let customerDetails = { first_name: "", last_name: "", profile_pic: "" };
