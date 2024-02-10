@@ -124,12 +124,7 @@ export const fbController = {
         res.status(StatusCodes.SUCCESS).send({ message: "All samples" });
       } catch (err) {
         console.log("ee:", err);
-        return next(
-          new ErrorResponse(
-            "Errror in recieving",
-            StatusCodes.INTERNAl_SERVER_ERROR
-          )
-        );
+        res.status(StatusCodes.SUCCESS).send({ message: "All samples" });
       }
     }
   ),
