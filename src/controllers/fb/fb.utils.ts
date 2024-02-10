@@ -31,7 +31,7 @@ async function handleRecievingMessage(message: any) {
     const fbAccount = await dbModels.FbAccount.find({ pageId: pageId });
     const customerDetails = await fbService.getCustomer(
       customerId,
-      fbAccount[0].userAccessToken
+      fbAccount && fbAccount[0] && fbAccount[0].userAccessToken
     );
     const newConversation = await dbModels.Conversation.create({
       client: pageId,
