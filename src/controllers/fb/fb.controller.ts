@@ -114,13 +114,23 @@ export const fbController = {
 
   recieveMessage: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-      const body = req.body;
+      try {
+        const body = req.body;
 
-      if (body.entry[0] && body.entry[0].messaging) {
-        const message = body.entry[0].messaging[0];
-        await handleRecievingMessage(message);
+        if (body.entry[0] && body.entry[0].messaging) {
+          const message = body.entry[0].messaging[0];
+          await handleRecievingMessage(message);
+        }
+        res.status(StatusCodes.SUCCESS).send({ message: "All samples" });
+      } catch (err) {
+        console.log("ee:", err);
+        return next(
+          new ErrorResponse(
+            "Errror in recieving",
+            StatusCodes.INTERNAl_SERVER_ERROR
+          )
+        );
       }
-      res.status(StatusCodes.SUCCESS).send({ message: "All samples" });
     }
   ),
 
