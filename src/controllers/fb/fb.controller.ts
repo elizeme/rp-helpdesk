@@ -208,13 +208,13 @@ export const fbController = {
         client: id,
       });
 
-      const pages: any = [
-        {
-          id: fbAccount[0].pageId,
-          access_token: fbAccount[0].pageAccessToken,
-          pageName: fbAccount[0].pageName,
-        },
-      ];
+      // const pages: any = [
+      //   {
+      //     id: fbAccount[0].pageId,
+      //     access_token: fbAccount[0].pageAccessToken,
+      //     pageName: fbAccount[0].pageName,
+      //   },
+      // ];
       // const pages = await fbService.getPages(
       //   fbAccount[0].fbUserId,
       //   fbAccount[0].userAccessToken
@@ -224,6 +224,11 @@ export const fbController = {
       //     new ErrorResponse(`Pages not found`, StatusCodes.NOT_FOUND)
       //   );
       // }
+      const pages = {
+        id: fbAccount[0].pageId,
+        access_token: fbAccount[0].pageAccessToken,
+        pageName: fbAccount[0].pageName,
+      };
       res.status(StatusCodes.SUCCESS).send({ pages, message: "All samples" });
     }
   ),
