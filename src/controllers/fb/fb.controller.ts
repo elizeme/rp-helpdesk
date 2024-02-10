@@ -117,7 +117,7 @@ export const fbController = {
   allConversations: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       const { pageId } = req.params;
-      const conv = await dbModels.Messenger.find({ pageId });
+      const conv = await dbModels.Messenger.find({ pageId: "224446764087685" });
       res.status(StatusCodes.SUCCESS).send({ conv });
     }
   ),
