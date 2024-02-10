@@ -78,10 +78,7 @@ const fbService = {
     return;
   },
 
-  getCustomer: async function (
-    userId: any,
-    accessToken: any = userAccessToken
-  ) {
+  getCustomer: async function (userId: any, accessToken: any) {
     try {
       const response = await axios.get(
         `${baseUrl}/${userId}?access_token=${accessToken}`
@@ -89,7 +86,7 @@ const fbService = {
       return response.data;
     } catch (err) {
       console.log("err", err);
-      throw new ErrorResponse("Cant", StatusCodes.NOT_FOUND);
+      throw new ErrorResponse("Cant get customer", StatusCodes.NOT_FOUND);
     }
   },
 };
