@@ -2,6 +2,7 @@ import { dbModels } from "../../database/models";
 import fbService from "../../services/axios/fb";
 
 async function handleRecievingMessage(message: any) {
+  console.log("mmmmmmmm", message);
   const customerId = message.sender.id,
     pageId = message.recipient.id,
     timestamp = message.timestamp,
