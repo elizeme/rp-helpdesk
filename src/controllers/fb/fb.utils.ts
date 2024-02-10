@@ -22,6 +22,7 @@ async function handleRecievingMessage(message: any) {
     currentTime.getTime() - 24 * 60 * 60 * 1000
   );
 
+  console.log("pppppaaaagggee", pageId);
   const conversation = await dbModels.Conversation.find({
     customerId,
     pageId,
