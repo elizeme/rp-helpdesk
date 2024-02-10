@@ -84,11 +84,12 @@ export const fbController = {
   getCustomerData: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
+        const accessToken = req.body.accessToken;
         const { id } = req.params;
-        const fbAccount = await dbModels.FbAccount.find({ customerId: id });
+        // const fbAccount = await dbModels.FbAccount.find({ customerId: id });
 
-        const accessToken =
-          fbAccount && fbAccount[0] && fbAccount[0].userAccessToken;
+        // const accessToken =
+        //   fbAccount && fbAccount[0] && fbAccount[0].userAccessToken;
         const t = await fbService.getCustomer(id, accessToken);
         res
           .status(StatusCodes.SUCCESS)

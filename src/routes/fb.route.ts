@@ -29,7 +29,7 @@ export default (router: Router): Router => {
 
   fbRouter.post("/messenger/send", fbController.sendMessage);
 
-  fbRouter.get("/customer/:id", fbController.getCustomerData);
+  fbRouter.post("/customer/:id", fbController.getCustomerData);
 
   fbRouter.get("/user", fbController.userDetails);
 
