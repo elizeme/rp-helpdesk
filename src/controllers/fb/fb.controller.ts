@@ -46,6 +46,8 @@ export const fbController = {
           req.body.fbAccessToken
         );
 
+        console.log("gsasaasgettpages", pages);
+
         await fbService.generateFeedAccess(pages);
         dbModels.FbAccount.create({
           page: pages && pages.length > 0 && pages[0].id,

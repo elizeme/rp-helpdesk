@@ -57,7 +57,6 @@ const fbService = {
       const response = await axios.get(
         `${baseUrl}/${userId}/accounts?access_token=${userAccessToken}`
       );
-      console.log("ggettpages", response.data);
       return response.data.data;
     } catch (err) {
       console.log("err", err);
