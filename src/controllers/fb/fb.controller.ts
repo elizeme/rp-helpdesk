@@ -95,12 +95,12 @@ export const fbController = {
   getCustomerData: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
-        const accessToken = req.body.accessToken;
+        // const accessToken = req.body.accessToken;
         const { id } = req.params;
-        // const fbAccount = await dbModels.FbAccount.find({ customerId: id });
+        const fbAccount = await dbModels.FbAccount.find({ customerId: id });
 
-        // const accessToken =
-        //   fbAccount && fbAccount[0] && fbAccount[0].userAccessToken;
+        const accessToken =
+          fbAccount && fbAccount[0] && fbAccount[0].userAccessToken;
         const t = await fbService.getCustomer(id, accessToken);
         res
           .status(StatusCodes.SUCCESS)
@@ -117,7 +117,7 @@ export const fbController = {
   allConversations: asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       const { pageId } = req.params;
-      const conv = await dbModels.Messenger.find({ pageId: "224446764087685" });
+      const conv = await dbModels.Messenger.find({ pageId });
       res.status(StatusCodes.SUCCESS).send({ conv });
     }
   ),
@@ -176,7 +176,7 @@ export const fbController = {
 
       const sentMsg = await fbService.sendOnMessenger(
         msgFormat,
-        "224446764087685",
+        pageId,
         pageFilter[0].access_token
       );
       const message = {
