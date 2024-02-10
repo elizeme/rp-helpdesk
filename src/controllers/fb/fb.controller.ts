@@ -54,6 +54,8 @@ export const fbController = {
           userAccessToken: req.body.fbAccessToken,
           fbUserId: req.body.fbUserId,
           isConnected: true,
+          pageId: pages && pages.length > 0 && pages[0].id,
+          pageAccessToken: pages && pages.length > 0 && pages[0].access_token,
         });
         res
           .status(StatusCodes.SUCCESS)
