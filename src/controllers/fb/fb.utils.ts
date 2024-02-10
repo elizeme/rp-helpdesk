@@ -21,8 +21,8 @@ async function handleRecievingMessage(message: any) {
   const timeBefore24Hours = new Date(
     currentTime.getTime() - 24 * 60 * 60 * 1000
   );
+  console.log("pppppaaaagggee", pageId, customerId);
 
-  console.log("pppppaaaagggee", pageId);
   const conversation = await dbModels.Conversation.find({
     customerId,
     pageId,
