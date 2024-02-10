@@ -210,9 +210,9 @@ export const fbController = {
 
       const pages: any = [
         {
-          id: fbAccount.pageId,
-          access_token: fbAccount.pageAccessToken,
-          pageName: fbAccount.pageName,
+          id: fbAccount[0].pageId,
+          access_token: fbAccount[0].pageAccessToken,
+          pageName: fbAccount[0].pageName,
         },
       ];
       // const pages = await fbService.getPages(
