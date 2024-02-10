@@ -29,10 +29,16 @@ async function handleRecievingMessage(message: any) {
 
   if (conversation.length == 0) {
     const fbAccount = await dbModels.FbAccount.find({ pageId: pageId });
-    const customerDetails = await fbService.getCustomer(
-      customerId,
-      fbAccount && fbAccount[0] && fbAccount[0].userAccessToken
-    );
+    let customerDetails = { first_name: "", last_name: "", profile_pic: "" };
+    try {
+      customerDetails = await fbService.getCustomer(
+        customerId,
+        fbAccount && fbAccount[0] && fbAccount[0].userAccessToken
+      );
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("acccccc", fbAccount);
     const newConversation = await dbModels.Conversation.create({
       client: pageId,
       pageId,
@@ -40,8 +46,8 @@ async function handleRecievingMessage(message: any) {
       messages: [recievedMsg],
       convType: "dm",
       lastMessageTimestamp: timestamp,
-      customerName: `${customerDetails.first_name} ${customerDetails.last_name}`,
-      customerProfilePic: `${customerDetails.profile_pic}`,
+      customerName: `${customerDetails?.first_name} ${customerDetails?.last_name}`,
+      customerProfilePic: `${customerDetails?.profile_pic}`,
     });
     const newMessenger = await dbModels.Messenger.create({
       client: pageId,
