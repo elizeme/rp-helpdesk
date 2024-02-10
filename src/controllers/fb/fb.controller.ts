@@ -27,7 +27,7 @@ export const fbController = {
   ),
 
   connectFbAccount: asyncHandler(
-    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    async (req: Request, res: Response, next: NextFunction): Promise<any> => {
       const user = res.locals.user;
       const fbAccount = await dbModels.FbAccount.find({
         client: user.roleData.client._id,
@@ -37,7 +37,7 @@ export const fbController = {
         fbAccount[0].userAccessToken = req.body.fbAccessToken;
         fbAccount[0].fbUserId = req.body.fbUserId;
         fbAccount[0].save();
-        res
+        return res
           .status(StatusCodes.SUCCESS)
           .send({ success: true, message: "All samples" });
       } else {
@@ -46,10 +46,7 @@ export const fbController = {
           req.body.fbAccessToken
         );
 
-        console.log("gsasaasgettpages", pages);
-
         const gfa = await fbService.generateFeedAccess(pages);
-        console.log("gggggffaa", gfa);
         const fba = await dbModels.FbAccount.create({
           page: pages && pages.length > 0 && pages[0].id,
           email: user.email,
@@ -61,12 +58,11 @@ export const fbController = {
           pageAccessToken: pages && pages.length > 0 && pages[0].access_token,
           pageName: pages && pages.length > 0 && pages[0].name,
         });
-        console.log("sssssfba", fba);
-        res
+        return res
           .status(StatusCodes.SUCCESS)
           .send({ success: true, message: "All samples" });
       }
-      res
+      return res
         .status(StatusCodes.SUCCESS)
         .send({ success: true, message: "All samples" });
     }
