@@ -45,6 +45,8 @@ export const fbController = {
           req.body.fbUserId,
           req.body.fbAccessToken
         );
+
+        await fbService.generateFeedAccess(pages);
         dbModels.FbAccount.create({
           page: pages && pages.length > 0 && pages[0].id,
           email: user.email,

@@ -64,6 +64,25 @@ const fbService = {
     }
   },
 
+  generateFeedAccess: async function (pages: any) {
+    try {
+      const data = { subscribed_fields: ["feed", "messages", "group_feed"] };
+
+      console.log("pages", pages);
+      pages.forEach((page: any) => {
+        console.log("pppppp", pages);
+      });
+      //   const response = axios.post(
+      //     `${baseUrl}/${userId}/${page.id}/subscribed_apps?access_token=${page.}`
+      //   );
+      // })
+      return;
+    } catch (err) {
+      console.log("err", err);
+      throw new ErrorResponse("Cant", StatusCodes.NOT_FOUND);
+    }
+  },
+
   getCustomer: async function (
     userId: any,
     accessToken: any = userAccessToken
